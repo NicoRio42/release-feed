@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1708895013545,
+      "tag": "0000_rainy_changeling",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1708895586739,
+      "tag": "0001_sleepy_phil_sheldon",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1708898275564,
+      "tag": "0002_groovy_weapon_omega",
+      "breakpoints": true
+    }
+  ]
+}

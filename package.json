@@ -1,0 +1,41 @@
+{
+	"name": "shoveljs",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "prettier --plugin-search-dir . --check .",
+		"format": "prettier --plugin-search-dir . --write .",
+		"migrations:generate": "drizzle-kit generate:sqlite",
+		"migrations:apply:local": "node scripts/migrate-local.js"
+	},
+	"devDependencies": {
+		"@iconify-json/carbon": "^1.1.27",
+		"@sveltejs/adapter-auto": "^3.1.0",
+		"@sveltejs/kit": "^2.3.3",
+		"@sveltejs/vite-plugin-svelte": "^3.0.1",
+		"@unocss/preset-icons": "^0.58.3",
+		"prettier": "^3.2.4",
+		"prettier-plugin-svelte": "^3.1.2",
+		"svelte": "^4.2.9",
+		"svelte-check": "^3.6.3",
+		"tslib": "^2.6.2",
+		"typescript": "^5.3.3",
+		"unocss": "^0.58.3",
+		"vite": "^5.0.11"
+	},
+	"dependencies": {
+		"@libsql/client": "0.4.0-pre.7",
+		"@lucia-auth/adapter-drizzle": "1.0.0-beta.5",
+		"arctic": "^0.10.5",
+		"drizzle-kit": "^0.20.13",
+		"drizzle-orm": "^0.29.3",
+		"lucia": "3.0.0-beta.14",
+		"oslo": "^0.27.1"
+	},
+	"type": "module"
+}
