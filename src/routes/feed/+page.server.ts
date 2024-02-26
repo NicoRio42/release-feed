@@ -1,6 +1,6 @@
 import { db } from '$lib/server/db.js';
 import { accessTokenTable, repositoryTable } from '$lib/server/schema.js';
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import { and, eq } from 'drizzle-orm';
 import type { Release } from './release.model.js';
 
@@ -25,6 +25,10 @@ export async function load({ locals }) {
 
 	const query = `
 fragment repoProperties on Repository {
+	nameWithOwner
+	owner {
+		avatarUrl
+	}
     latestRelease {
         id
         name
@@ -56,19 +60,40 @@ fragment repoProperties on Repository {
 		})
 	});
 
-	let releasesResponse: { data: { latestRelease: Omit<Release, 'repoName'> }[] } =
-		await response.json();
+	if (response.status === 401) throw redirect(302, '/login/github');
+
+	let releasesResponse: graphqlResponse = await response.json();
+
+	const repositoriesWithReleases = Object.values(releasesResponse.data).map((repoFromGraphQL) => {
+		const [owner, name] = repoFromGraphQL.nameWithOwner.split('/');
+		const repoFromDatabase = repositories.find(
+			(repo) => repo.name === name && repo.owner === owner
+		);
+		if (repoFromDatabase === undefined) throw error(500);
+
+		return {
+			...repoFromGraphQL.latestRelease,
+			repoName: repoFromGraphQL.nameWithOwner,
+			ownerAvatarUrl: repoFromGraphQL.owner.avatarUrl,
+			latestSeenRelease: repoFromDatabase.latestSeenRelease
+		};
+	});
 
 	return {
-		releases: Object.values(releasesResponse.data).map((r, index) => {
-			return {
-				...r.latestRelease,
-				repoName: `${repositories[index].owner}/${repositories[index].name}`
-			};
-		})
+		releases: repositoriesWithReleases
 	};
 }
 
+type graphqlResponse = {
+	data: Record<
+		string,
+		{
+			nameWithOwner: string;
+			owner: { avatarUrl: string };
+			latestRelease: Omit<Release, 'repoName'>;
+		}
+	>;
+};
 export const actions = {
 	default: async ({ locals, request }) => {
 		if (locals.user === null) throw redirect(302, '/login');
