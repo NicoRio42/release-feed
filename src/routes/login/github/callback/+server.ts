@@ -19,11 +19,15 @@ export const GET = async ({ url, cookies, locals }) => {
 	try {
 		const { accessToken } = await githubAuth.validateAuthorizationCode(code);
 
+		console.log(accessToken);
+
 		const githubUserResponse = await fetch('https://api.github.com/user', {
 			headers: {
 				Authorization: `Bearer ${accessToken}`
 			}
 		});
+
+		console.log(githubUserResponse.status, githubUserResponse.statusText);
 
 		const githubUser: GitHubUser = await githubUserResponse.json();
 
