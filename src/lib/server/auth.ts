@@ -25,7 +25,9 @@ export const auth = new Lucia(adapter, {
 	})
 });
 
-export const githubAuth = new GitHub(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET);
+export const githubAuth = new GitHub(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, {
+	redirectURI: 'https://release-feed.pages.dev/login/github/callback'
+});
 
 declare module 'lucia' {
 	interface Register {
