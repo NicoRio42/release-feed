@@ -23,7 +23,8 @@ export const GET = async ({ url, cookies }) => {
 
 		const githubUserResponse = await fetch('https://api.github.com/user', {
 			headers: {
-				Authorization: `Bearer ${accessToken}`
+				Authorization: `Bearer ${accessToken}`,
+				Accept: 'application/vnd.github+json'
 			}
 		});
 
