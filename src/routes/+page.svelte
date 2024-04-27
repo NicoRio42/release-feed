@@ -14,9 +14,7 @@
 			</fieldset>
 		</form>
 
-		{#if data.releases.length !== 0}
-			<h2>New releases</h2>
-		{:else}
+		{#if data.releases.length === 0}
 			<p>No repo yet</p>
 		{/if}
 
