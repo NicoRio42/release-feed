@@ -53,7 +53,8 @@ fragment repoProperties on Repository {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-			Authorization: `Bearer ${accessToken.token}`
+			Authorization: `Bearer ${accessToken.token}`,
+			'User-Agent': 'Release-Feed'
 		},
 		body: JSON.stringify({
 			query
