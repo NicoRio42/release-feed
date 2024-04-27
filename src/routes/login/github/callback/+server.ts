@@ -76,7 +76,7 @@ export const GET = async ({ url, cookies }) => {
 		return new Response(null, {
 			status: 302,
 			headers: {
-				Location: '/feed'
+				Location: '/'
 			}
 		});
 	} catch (e) {
