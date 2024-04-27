@@ -5,7 +5,7 @@ import { OAuth2RequestError } from 'arctic';
 import { and, eq } from 'drizzle-orm';
 import { generateId } from 'lucia';
 
-export const GET = async ({ url, cookies, locals }) => {
+export const GET = async ({ url, cookies }) => {
 	const code = url.searchParams.get('code');
 	const state = url.searchParams.get('state');
 	const storedState = cookies.get('github_oauth_state') ?? null;
