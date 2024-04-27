@@ -30,7 +30,7 @@ export const GET = async ({ url, cookies }) => {
 		console.log(
 			githubUserResponse.status,
 			githubUserResponse.statusText,
-			githubUserResponse.headers
+			JSON.stringify(Object.fromEntries(githubUserResponse.headers))
 		);
 
 		const githubUser: GitHubUser = await githubUserResponse.json();
