@@ -2,9 +2,9 @@ import { githubAuth } from '$lib/server/auth.js';
 import { redirect } from '@sveltejs/kit';
 import { generateState } from 'arctic';
 
-export const GET = async ({ cookies, locals }) => {
+export const GET = async ({ cookies }) => {
 	const state = generateState();
-	const url = await githubAuth.createAuthorizationURL(state, { scopes: ['read:user'] });
+	const url = await githubAuth.createAuthorizationURL(state, { scopes: ['user'] });
 
 	cookies.set('github_oauth_state', state, {
 		path: '/',
