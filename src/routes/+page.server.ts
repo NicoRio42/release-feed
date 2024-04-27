@@ -129,7 +129,8 @@ export const actions = {
 		const repoPing = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
 			headers: {
 				'Content-Type': 'application/json',
-				Authorization: `Bearer ${accessToken.token}`
+				Authorization: `Bearer ${accessToken.token}`,
+				'User-Agent': 'Release-Feed'
 			}
 		});
 
