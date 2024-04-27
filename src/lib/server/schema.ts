@@ -47,6 +47,5 @@ export const repositoryTable = sqliteTable('repository', {
 		.notNull()
 		.references(() => userTable.id, { onDelete: 'cascade' }),
 	owner: text('owner').notNull(),
-	name: text('name').notNull(),
-	latestSeenRelease: text('latest_seen_release')
+	name: text('name').notNull()
 });

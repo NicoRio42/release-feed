@@ -74,8 +74,7 @@ fragment repoProperties on Repository {
 		return {
 			...repoFromGraphQL.latestRelease,
 			repoName: repoFromGraphQL.nameWithOwner,
-			ownerAvatarUrl: repoFromGraphQL.owner.avatarUrl,
-			latestSeenRelease: repoFromDatabase.latestSeenRelease
+			ownerAvatarUrl: repoFromGraphQL.owner.avatarUrl
 		};
 	});
 
@@ -94,6 +93,7 @@ type graphqlResponse = {
 		}
 	>;
 };
+
 export const actions = {
 	default: async ({ locals, request }) => {
 		if (locals.user === null) throw redirect(302, '/login');
